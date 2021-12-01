@@ -9,13 +9,15 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TournamentListComponent } from './components/tournament-list/tournament-list.component';
 import {TokenInterceptor} from './components/interceptors/token.interceptor';
 import { TournamentComponent } from './components/tournament/tournament.component';
+import { TaskComponent } from './components/task/task.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TournamentListComponent,
-    TournamentComponent
+    TournamentComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,

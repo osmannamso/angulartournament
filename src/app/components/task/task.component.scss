@@ -1,0 +1,26 @@
+.tournament-tasks {
+  display: flex;
+
+  .task-item {
+    &:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
+}
+
+.submit-wrapper {
+  display: flex;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin-top: 25px;
+  height: 90vh;
+  overflow: hidden;
+
+  .task-wrapper {
+    padding: 15px;
+    width: 25%;
+    border-right: 1px solid black;
+    height: 100%;
+    overflow: auto;
+  }
+}

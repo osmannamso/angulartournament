@@ -8,16 +8,17 @@ export interface Tournament {
 }
 
 export interface AcceptanceByUser {
-  accepted: boolean;
+  accepted: string;
   user: User;
 }
 
-export interface Task {
+export interface TournamentTask {
+  id: number;
   title: string;
   description: string;
   acceptance_by_users: AcceptanceByUser[];
 }
 
 export interface SingleTournament extends Tournament {
-  task_set: Task[];
+  task_set: TournamentTask[];
 }

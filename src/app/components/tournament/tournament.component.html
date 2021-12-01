@@ -9,10 +9,10 @@
     </tr>
     <tr *ngFor="let task of tournament.task_set">
       <td>
-        {{ task.title }}
+        <a [routerLink]="['/tournaments', tournament.id, 'tasks', task.id]">{{ task.title }}</a>
       </td>
       <td *ngFor="let acceptance of task.acceptance_by_users">
-        {{ acceptance.accepted }}
+        {{ acceptance.accepted | date: 'HH:mm' }}
       </td>
     </tr>
   </table>
