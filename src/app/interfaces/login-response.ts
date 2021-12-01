@@ -1,3 +1,8 @@
 export interface LoginResponse {
-  token: string;
+  access: string;
+}
+
+export interface User {
+  id: number;
+  username: string;
 }

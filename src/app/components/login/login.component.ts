@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {take} from 'rxjs';
+import {LocalStorage} from '../../helpers/cookie-methods';
+import {TOKEN} from '../../values/variables';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,8 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {}
@@ -24,7 +28,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm).pipe(
       take(1)
     ).subscribe((data) => {
-      console.log(data);
+      LocalStorage.set(TOKEN, data.access);
+      this.router.navigate(['/tournaments']).then(null);
     });
   }
 

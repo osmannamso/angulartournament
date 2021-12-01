@@ -1,0 +1,6 @@
+<p *ngFor="let tournament of tournaments" class="">
+  <a [routerLink]="['/tournaments/' + tournament.id]">
+    Starts at: {{ tournament.starts_at | date: 'MMMM d, HH:mm' }},
+    Ends at: {{ tournament.ends_at | date: 'MMMM d, HH:mm' }}
+  </a>
+</p>

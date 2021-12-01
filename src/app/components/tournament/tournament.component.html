@@ -1,0 +1,22 @@
+<ng-container *ngIf="tournament else loading">
+  {{ tournament.starts_at | date: 'MMMM d, HH:mm' }}
+  <table class="tournament-table">
+    <tr>
+      <th>Task</th>
+      <th *ngFor="let acceptance of tournament.task_set[0].acceptance_by_users">
+        {{ acceptance.user.username }}
+      </th>
+    </tr>
+    <tr *ngFor="let task of tournament.task_set">
+      <td>
+        {{ task.title }}
+      </td>
+      <td *ngFor="let acceptance of task.acceptance_by_users">
+        {{ acceptance.accepted }}
+      </td>
+    </tr>
+  </table>
+</ng-container>
+<ng-template #loading>
+  ...Loading
+</ng-template>
