@@ -10,6 +10,7 @@ import { TournamentListComponent } from './components/tournament-list/tournament
 import {TokenInterceptor} from './components/interceptors/token.interceptor';
 import { TournamentComponent } from './components/tournament/tournament.component';
 import { TaskComponent } from './components/task/task.component';
+import { CodeEditorComponent } from './components/code-editor/code-editor.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { TaskComponent } from './components/task/task.component';
     LoginComponent,
     TournamentListComponent,
     TournamentComponent,
-    TaskComponent
+    TaskComponent,
+    CodeEditorComponent
   ],
   imports: [
     BrowserModule,

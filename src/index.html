@@ -10,4 +10,88 @@
 <body>
   <app-root></app-root>
 </body>
+<script src="https://microsoft.github.io/monaco-editor/node_modules/monaco-editor/min/vs/loader.js"></script>
+<link rel="stylesheet "type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+<script>
+  'use strict';
+  require.config({
+    baseUrl: 'https://microsoft.github.io/monaco-editor/node_modules/monaco-editor/min/'
+  });
+
+
+  var editor = null, diffEditor = null;
+
+  function initCode() {
+    require(['vs/editor/editor.main'], function () {
+      var MODES = (function() {
+        var modesIds = ['python', 'javascript'];
+
+        return modesIds.map(function(modeId) {
+          let sample = '';
+          if (modeId === 'python') {
+            sample = 'def solution():\n\t# write your code here';
+          } else {
+            sample = 'function solution() {\n\t// write your code here\n}';
+          }
+          return {
+            modeId: modeId,
+            value: sample
+          };
+        });
+      })();
+
+      for (var i = 0; i < MODES.length; i++) {
+        var o = document.createElement('option');
+        o.textContent = MODES[i].modeId;
+        $(".language-picker").append(o);
+      }
+      $(".language-picker").change(function() {
+        loadSample(MODES[this.selectedIndex]);
+      });
+      loadSample(MODES[0]);
+
+      $('#inline-diff-checkbox').change(function () {
+        diffEditor.updateOptions({
+          renderSideBySide: !$(this).is(':checked')
+        });
+      });
+    });
+
+    window.onresize = function () {
+      if (editor) {
+        editor.layout();
+      }
+      if (diffEditor) {
+        diffEditor.layout();
+      }
+    };
+  }
+
+  function loadSample(mode) {
+    if (!editor) {
+      editor = monaco.editor.create(document.getElementById('editor'), {
+        value: mode.value,
+        language: mode.modeId
+      });
+    } else {
+      monaco.editor.setModelLanguage(editor.getModel(), mode.modeId);
+      editor.getModel().setValue(mode.value);
+    }
+  }
+
+  function changeTheme(theme) {
+    var newTheme = 'vs-dark';
+    if (editor) {
+      editor.updateOptions({ 'theme' : newTheme });
+    }
+    if (diffEditor) {
+      diffEditor.updateOptions({ 'theme': newTheme });
+    }
+  }
+</script>
 </html>
